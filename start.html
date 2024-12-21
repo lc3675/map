@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>WebpageFormatTesting</title>
+		<script src="https://d3js.org/d3.v6.min.js"></script>
+		<script src="start.js" defer></script>
+	
+		<style type="text/css">
+			*, *:before, *:after {
+  					box-sizing: border-box;
+			}
+
+			body {
+				margin: 40px;
+				font-family: 'Courier New', Courier, monospace;
+				background-color:#19004b ;
+			}
+
+			h1, p {
+				margin: 0 0 lem 0;
+			}
+
+			p1 {
+				font-size: 9px;
+			}
+
+			.wrapper {
+				max-width: 1200px;
+				margin: 0 20px;
+				display: grid;
+				grid-template-columns: 1fr 3fr;
+				grid-auto-rows: minmax(50px, auto);
+				column-gap: 10px;
+				row-gap: 15px;
+			}
+
+			/* Responsive layout */
+			@media screen and (min-width: 600px) {
+				
+				/* no grid support? */
+				.block-a, .block-b, .block-c {
+						float: left;
+						width: 19.1489%;
+					}
+
+					.container {
+						float: right;
+						width: 79.7872%;
+					}
+
+					
+					.header, .footer {
+						grid-column: 1 / -1;
+						/* needed for the floated layout */
+						clear: both;
+					}
+					
+					.block-a {
+						grid-column: 1;
+						grid-row: 2;
+					}
+
+					.block-a {
+						grid-column: 1;
+						grid-row: 2;
+					}
+
+				}
+
+			.wrapper > * {
+				color: #fff;
+				border-radius: 15px;
+				padding: 10px;
+				font-size: 100%;
+				/* needed for the floated layout*/
+				margin-bottom: 5px;
+			}
+
+
+			/* We need to set the widths used on floated items back to auto, and remove the bottom margin as when we have grid we have gaps. */
+			@supports (display: grid) {
+				.wrapper > * {
+					width: auto;
+					margin: 0;
+				}
+			}
+
+
+			/* Style the footer */
+			footer {
+			padding: 5px;
+			text-align: center;
+			color: white;
+			margin: 1rem;
+			}
+
+			/* We need to set the widths used on floated items back to auto, and remove the bottom margin as when we have grid we have gaps. */
+			@supports (display: grid) {
+				.wrapper > * {
+				width: auto;
+				margin: 0;
+				}
+			}
+
+			/* Style the header */
+			header {
+				background-color:  rgba(255, 255, 255, 0.0);
+				padding: 8px;
+				text-align: center;
+				font-size: 25px;
+				color: white;
+				border-radius: 10px;
+				margin: 0rem;
+			}
+
+			h1{
+				padding: 8px;
+				text-align: center;
+				font-size: 25px;
+				color: white;
+				/*
+				background-color:  rgba(255, 255, 255, 0.2);
+				border: 0.1rem solid white; 
+				border-radius: 10px;
+				*/
+				margin: 0rem;
+			}
+
+			.buttonblock {
+				color: white;
+				border: 1px solid white;
+				font-family: 'Courier New', Courier, monospace;
+				text-align: center;
+				padding-top: 2px;
+				padding-bottom: 2px;
+				padding-left: 80 px;
+				padding-right: 80 px;
+				border-radius: 5px;
+				font-size: 10px;
+				background-color: rgba(255, 255, 255, 0.20);
+				cursor: pointer;
+				display: inline flex;
+			}
+
+			.block-a {
+				padding: 10px;
+				text-align: left;
+				font-size: 10px;
+				color: white;
+				/* background-color:  rgba(255, 255, 255, 0.2);
+				border: 0.1rem solid white; 
+				border-radius: 10px;
+				*/
+			}
+
+			/* Styles for a Horizontal list with Border Separtion */
+			ul.horizontal-list {
+				list-style: none;
+			}
+
+			ul.horizontal-list li {
+				display: inline-block;
+				padding: 0.2 rem;
+				min-width: 1 rem;
+				text-align: center;
+				font-size: 15px;
+				color: white;
+			}
+
+			ul.horizontal-list li:not(:last-child) {
+				border-right: 2px solid white;
+			}
+
+			ul:hover { 
+				color: rgb(255, 255, 255); 
+				cursor: pointer; 
+			} 
+
+		</style>
+	</head>
+
+	<body onload="start()";>
+	<div class="wrapper">
+			<header class="header">
+				<h1>Project Title To Go Here</h1>
+				<ul id="buttons" class="horizontal-list"></ul>				
+			</header>
+
+			<div id="textContent" class="block-a">
+			</div>
+			
+			<div class = "container">
+
+			<svg width="100%" height="100%" viewBox="0 0 600 600" > 
+				// create svg element:
+				<rect style="fill: #f8f8f8" x=0 y=10 border=0.1rem opacity='0.75' border-radius=10px width=500 height=100>
+			    </rect>
+				<g id="gBlock">
+				</g>
+			</svg>	
+				
+			</div>
+
+		</div>
+		
+		<footer>
+			<ul class="horizontal-list">
+				<li><a href="#">Email</a></li>
+				<li><a href="#">Instagram</a></li>
+				<li><a href="#">Articles</a></li>
+				<li><a href="#">About</a></li>
+			</ul>
+		</footer>
+
+
+	</body>
+	
+
+	
+</html>

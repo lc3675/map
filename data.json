@@ -1,0 +1,45 @@
+{
+ "selected": {
+	"id":"c0"
+ },
+ "components":[
+   {
+     "id":"c0",
+     "title":"Home",
+	 "contentPath":"content0.html",
+	 "svgPath":"svg0.js"
+   },
+   {
+     "id":"c1",
+     "title":"Description",
+	 "contentPath":"content1.html",
+	 "svgPath":"svg1.js"
+   },
+   {
+     "id":"c2",
+     "title":"Taxonomies",
+	 "contentPath":"content2.html",
+	 "svgPath":"svg2.js"
+   },
+   {
+     "id":"c3",
+     "title":"Newspapers",
+	 "contentPath":"content3.html",
+	 "svgPath":"svg3.js"
+   },
+   {
+     "id":"c4",
+     "title":"Mapping Maps",
+	 "data":{
+		"circle": {
+				"cx":0,
+				"cy":30,
+				"r":15
+				}
+			},
+	 "contentPath":"content4.html",
+	 "svgPath":"svg4.js"	 
+   }
+ ]
+} 
+ 
