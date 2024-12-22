@@ -11,7 +11,7 @@
    },
    {
      "id":"c1",
-     "title":"Description",
+     "title":"Interviews",
 	 "contentPath":"content1.html",
 	 "svgPath":"svg1.js"
    },
@@ -23,7 +23,7 @@
    },
    {
      "id":"c3",
-     "title":"Newspapers",
+     "title":"Media",
 	 "contentPath":"content3.html",
 	 "svgPath":"svg3.js"
    },

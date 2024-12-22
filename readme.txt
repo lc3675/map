@@ -74,3 +74,5 @@ The SVG is a JavaScript file named as a pattern svgX.js, whose path is identifie
 10. Each svg.js must prived start() and end() functions.
 start() is used to display the component SVG.
 end() is used to clean up the component and/or data if needed. Usually leave it empty.
+
+/*click on this to start running and testing website: http://127.0.0.1:8080/start.html*/

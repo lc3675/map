@@ -6,14 +6,34 @@ the "component" object.
 */
 
 function start(component, g) {
+
 	console.log("start " + component.id + " enter");
-	let circle = g.append("circle")
-		.attr("cx", 30)
-		.attr("cy", 30)
-		.attr("r", 15)
-		.attr("fill", "pink")
-		.data(component.id);
+	// Creates a Masonry Layout with Text.
+
+	function createMasonryLayout() {
+		const container = d3.select("#svgBlock") // Use svgBlock as the container
+		  .append("foreignObject") // Add foreignObject to embed HTML
+		  .attr("width", "100%")
+		  .attr("height", "100%")
+		  .append("xhtml:div") // Embed a div for masonry layout
+		  .attr("class", "masonry"); // Add masonry CSS class
+	  
+		// Load data from CSV
+		d3.csv("data.csv").then(data => {
+		  // For each row in the CSV, create a box
+		  data.forEach(d => {
+			container.append("div")
+			  .attr("class", "masonry-box") // Apply masonry box style
+			  .text(d.text); // Populate with text content from CSV
+		  });
+		});
+	  }
+	  
+	  // Call the function to create the masonry layout
+	  createMasonryLayout();
+
 	return;
+
 }
 
 function end(component, g) {

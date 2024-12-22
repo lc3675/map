@@ -8,129 +8,71 @@
 		<script src="start.js" defer></script>
 	
 		<style type="text/css">
-			*, *:before, *:after {
-  					box-sizing: border-box;
+			html {
+				font-family: 'Courier New', Courier, monospace;
+				box-sizing: border-box;
 			}
 
+			*,
+			*:before,
+			*:after {
+				box-sizing: inherit;
+			}
+
+			.row::after {
+				content: "";
+				clear: both;
+				display: table;
+			}
+
+			[class*="col-"] {
+				float: left;
+				padding: 15px;
+			}
+
+	
 			body {
 				margin: 40px;
 				font-family: 'Courier New', Courier, monospace;
-				background-color:greenyellow;
-			}
-
-			h1, p {
-				margin: 0 0 lem 0;
-			}
-
-			p1 {
-				font-size: 9px;
-			}
-
-			.wrapper {
-				max-width: 1200px;
-				margin: 0 20px;
-				display: grid;
-				grid-template-columns: 1fr 3fr;
-				grid-auto-rows: minmax(50px, auto);
-				column-gap: 10px;
-				row-gap: 15px;
-			}
-
-			/* Responsive layout */
-			@media screen and (min-width: 600px) {
-				
-				/* no grid support? */
-				.block-a, .block-b, .block-c {
-						float: left;
-						width: 19.1489%;
-					}
-
-					.container {
-						float: right;
-						width: 79.7872%;
-					}
-
-					
-					.header, .footer {
-						grid-column: 1 / -1;
-						/* needed for the floated layout */
-						clear: both;
-					}
-					
-					.block-a {
-						grid-column: 1;
-						grid-row: 2;
-					}
-
-					.block-a {
-						grid-column: 1;
-						grid-row: 2;
-					}
-
-				}
-
-			.wrapper > * {
-				color: #fff;
-				border-radius: 15px;
-				padding: 10px;
-				font-size: 100%;
-				/* needed for the floated layout*/
-				margin-bottom: 5px;
-			}
-
-
-			/* We need to set the widths used on floated items back to auto, and remove the bottom margin as when we have grid we have gaps. */
-			@supports (display: grid) {
-				.wrapper > * {
-					width: auto;
-					margin: 0;
-				}
-			}
-
-
-			/* Style the footer */
-			footer {
-			padding: 5px;
-			text-align: center;
-			color: white;
-			margin: 1rem;
-			}
-
-			/* We need to set the widths used on floated items back to auto, and remove the bottom margin as when we have grid we have gaps. */
-			@supports (display: grid) {
-				.wrapper > * {
-				width: auto;
-				margin: 0;
-				}
+				background-color:whitesmoke;
 			}
 
 			/* Style the header */
-			header {
+			.header {
 				background-color:  rgba(255, 255, 255, 0.0);
 				padding: 8px;
 				text-align: center;
 				font-size: 25px;
-				color: white;
+				color: black;
 				border-radius: 10px;
 				margin: 0rem;
 			}
-
-			h1{
+				
+			.h1{
 				padding: 8px;
 				text-align: center;
-				font-size: 25px;
-				color: white;
-				/*
-				background-color:  rgba(255, 255, 255, 0.2);
-				border: 0.1rem solid white; 
-				border-radius: 10px;
-				*/
+				font-size: 20px;
+				color: black;
 				margin: 0rem;
+			}
+
+			.h2{
+				padding: 8px;
+				text-align: center;
+				font-size: 14px;
+				color: black;
+				margin: 0rem;
+			}
+
+			#buttons {
+				list-style: none; /* Removes bullet points */
+				padding: 0; /* Removes default padding */
+				margin: 0; /* Removes default margin */
 			}
 
 			.buttonblock {
-				color: white;
-				border: 1px solid white;
+				color: black;
+				border: 1px solid black;
 				font-family: 'Courier New', Courier, monospace;
 				text-align: center;
 				padding-top: 2px;
@@ -138,85 +80,122 @@
 				padding-left: 80 px;
 				padding-right: 80 px;
 				border-radius: 5px;
-				font-size: 10px;
-				background-color: rgba(255, 255, 255, 0.20);
+				margin: 3px;
+				font-size: 14px;
+				background-color: rgba(255, 255, 255, 0.2);
 				cursor: pointer;
 				display: inline flex;
 			}
 
-			.block-a {
-				padding: 10px;
-				text-align: left;
-				font-size: 10px;
-				color: white;
-				/* background-color:  rgba(255, 255, 255, 0.2);
-				border: 0.1rem solid white; 
+			.aside{
+				background-color:  rgba(255, 255, 255, 0.2);
+				border: 0.1rem solid black; 
 				border-radius: 10px;
-				*/
-			}
-
-			/* Styles for a Horizontal list with Border Separtion */
-			ul.horizontal-list {
-				list-style: none;
-			}
-
-			ul.horizontal-list li {
-				display: inline-block;
-				padding: 0.2 rem;
-				min-width: 1 rem;
+				padding: 8px;
 				text-align: center;
-				font-size: 15px;
-				color: white;
+				font-size: 13px;
+				color: black;
+				text-wrap: wrap;
 			}
 
-			ul.horizontal-list li:not(:last-child) {
-				border-right: 2px solid white;
+			/* Style the footer */
+			.footer {
+				padding: 5px;
+				text-align: center;
+				color: black;
+				margin: 1rem;
+				font-size: 12px;
 			}
 
-			ul:hover { 
-				color: rgb(255, 255, 255); 
-				cursor: pointer; 
-			} 
+			/* For mobile phones: */
+			[class*="col-"] {
+				width: 100%;
+			}
 
+			@media only screen and (min-width: 600px) {
+			/* For tablets: */
+				.col-s-1 {width: 8.33%;}
+				.col-s-2 {width: 16.66%;}
+				.col-s-3 {width: 25%;}
+				.col-s-4 {width: 33.33%;}
+				.col-s-5 {width: 41.66%;}
+				.col-s-6 {width: 50%;}
+				.col-s-7 {width: 58.33%;}
+				.col-s-8 {width: 66.66%;}
+				.col-s-9 {width: 75%;}
+				.col-s-10 {width: 83.33%;}
+				.col-s-11 {width: 91.66%;}
+				.col-s-12 {width: 100%;}
+			}
+
+			@media only screen and (min-width: 768px) {
+			/* For desktop: */
+				.col-1 {width: 8.33%;}
+				.col-2 {width: 16.66%;}
+				.col-3 {width: 25%;}
+				.col-4 {width: 33.33%;}
+				.col-5 {width: 41.66%;}
+				.col-6 {width: 50%;}
+				.col-7 {width: 58.33%;}
+				.col-8 {width: 66.66%;}
+				.col-9 {width: 75%;}
+				.col-10 {width: 83.33%;}
+				.col-11 {width: 91.66%;}
+				.col-12 {width: 100%;}
+			}
+			.masonry {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive columns */
+				grid-gap: 15px; /* Spacing between boxes */
+			}
+
+			.masonry-box {
+				background-color: rgba(0, 0, 0, 0.05);
+				border: 1px solid black;
+				border-radius: 8px;
+				padding: 10px;
+				font-family: 'Courier New', Courier, monospace;
+				font-size: 14px;
+				overflow-wrap: break-word; /* Handle long text */
+				word-wrap: break-word; /* Ensure long words break to fit the box */
+			}
 		</style>
 	</head>
 
+
 	<body onload="start()";>
-	<div class="wrapper">
-			<header class="header">
-				<h1>Project Title To Go Here</h1>
-				<ul id="buttons" class="horizontal-list"></ul>				
-			</header>
 
-			<div id="textContent" class="block-a">
-			</div>
+		<div class="header">
+			<h1>The Peatland Workbook</h1>
+			<ul id="buttons" >
+			</ul>	
+		</div>
+
+		<div class="row">
+			<div class="col-3 col-s-12">
+				<div class="aside" div id="textContent">
+					<h2>Description</h2>
+					<p>description goes here.</p>
+				</div>
+			</div>	
 			
-			<div class = "container">
-
-			<svg width="100%" height="100%" viewBox="0 0 600 600" > 
-				// create svg element:
-				<rect style="fill: #f8f8f8" x=0 y=10 border=0.1rem opacity='0.75' border-radius=10px width=500 height=100>
-			    </rect>
-				<g id="gBlock">
-				</g>
-			</svg>	
-				
+			<div class = "col-9 col-s-12">
+				<svg width="100%" height="100%" id="svgBlock"> 
+					// create svg element:
+					<rect style="fill: black" x=0 y=5 opacity='0.0' border-radius=10px width=100% height=100%>
+					</rect>
+					<g id="gBlock"> 
+					</g>
+				</svg>	
 			</div>
+
 
 		</div>
-		
-		<footer>
-			<ul class="horizontal-list">
-				<li><a href="#">Email</a></li>
-				<li><a href="#">Instagram</a></li>
-				<li><a href="#">Articles</a></li>
-				<li><a href="#">About</a></li>
-			</ul>
-		</footer>
 
+		<div class="footer">
+			  <p>Resize the browser window to see how the content respond to the resizing.</p>
+		</div>
 
 	</body>
-	
-
 	
 </html>

@@ -7,11 +7,17 @@ const holder={
 };
 
 async function start() {
- holder.svg = d3.select("svg");
- holder.data = await d3.json("data.json");
- holder.data.selected["js"] = null;
- addButtons(holder.data.components);
- loadContent(holder.data.selected.id);
+	holder.svg = d3.select("svg");
+	holder.data = await d3.json("data.json");
+	holder.data.selected["js"] = null;
+	addButtons(holder.data.components);
+	loadContent(holder.data.selected.id);
+
+   // Adjust the rectangle height after loading
+ 	  adjustRectHeight();
+	 // Create the masonry layout
+ 	 createMasonryLayout();
+
  return;
 }
 
@@ -41,6 +47,46 @@ function loadContent(id) {
 	loadJsContent(id);
 	return;
 }
+
+//Dynamic height adjustment for rectangle SVG//
+function adjustRectHeight() {
+	const aside = document.querySelector(".aside"); // Select the aside element
+	const rect = document.querySelector("svg rect"); // Select the rect element
+	
+	// Get the computed height of the aside element
+	const asideHeight = aside.offsetHeight;
+	
+	// Set the rect height to match the aside height
+	rect.setAttribute("height", asideHeight);
+  }
+  // Add event listeners to ensure it adjusts dynamically
+  window.addEventListener("resize", adjustRectHeight);
+
+
+// Creates a Masonry Layout with Text.//
+  function createMasonryLayout() {
+	const container = d3.select("#svgBlock") // Use svgBlock as the container
+	  .append("foreignObject") // Add foreignObject to embed HTML
+	  .attr("width", "100%")
+	  .attr("height", "100%")
+	  .append("xhtml:div") // Embed a div for masonry layout
+	  .attr("class", "masonry"); // Add masonry CSS class
+  
+	// Load data from CSV
+	d3.csv("data.csv").then(data => {
+	  // For each row in the CSV, create a box
+	  data.forEach(d => {
+		container.append("div")
+		  .attr("class", "masonry-box") // Apply masonry box style
+		  .text(d.text); // Populate with text content from CSV
+	  });
+	});
+  }
+  
+  // Call the function to create the masonry layout
+  createMasonryLayout();
+
+
 
 async function loadJsContent(id) {
 	const g = emptyG();
@@ -76,6 +122,7 @@ function getFullPath(path) {
 	return path;
 }
 
+
 function emptyG() {
 	console.log("emptyG()");
 	const g = holder.svg.select("#" + holder.gBlockId);
@@ -106,49 +153,4 @@ async function deleteSelectedJs() {
 	const path = comp.svgPath;
 	await cache.delete(path);
 	return;
-}
-/*	
-var w = 500;
-var h = 100;
-					
-var dataset = [
-	[5, 20], [480, 90], [250, 50], [100, 33], [330, 95],
-	[410, 12], [475, 44], [25, 67], [85, 21], [220, 88]
-];
-*/
-			
-//Create SVG element
-/*
-var svg = d3.select("rect").append("svg").attr("width", w).attr("height", h);
-svg.selectAll("circle")
-	.data(dataset)
-	.enter()
-	.append("circle")
-	.attr("cx", function(d) {
-		return d[0];
-	})
-	.attr("cy", function(d) {
-		return d[1];
-	})
-	.attr("r", function(d) {
-		return Math.sqrt(h - d[1]);
-	});
-
-svg.selectAll("text")
-	.data(dataset)
-	.enter()
-	.append("text")
-	.text(function(d) {
-		return d[0] + "," + d[1];
-	})
-	.attr("x", function(d) {
-		return d[0];
-	})
-	.attr("y", function(d) {
-		return d[1];
-	})
-	.attr("font-family", "sans-serif")
-	.attr("font-size", "11px")
-	.attr("fill", "white");
-					
-*/					
+}				
