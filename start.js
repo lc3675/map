@@ -13,12 +13,13 @@ async function start() {
 	addButtons(holder.data.components);
 	loadContent(holder.data.selected.id);
 
- 	  // Adjust the rectangle height after loading
- 	  adjustRectHeight();
- 	 // Add a resize event listener to ensure dynamic adjustments
- 	 window.addEventListener("resize", adjustRectHeight);
-	 // Create the masonry layout
- 	 createMasonryLayout();
+ 	// Adjust the rectangle height after loading
+ 	adjustRectHeight();
+ 	// Add a resize event listener to ensure dynamic adjustments
+ 	window.addEventListener("resize", adjustRectHeight);
+	// Create the masonry layout
+ 	createMasonryLayout();
+	// Create the timeline
 	createTimeline();
  return;
 }
@@ -43,27 +44,6 @@ function createButton(ele) {
 	});
   return b;
 }
-
-function adjustRectHeight() {
-	const aside = document.querySelector(".aside"); // Select the aside element
-	const svg = document.querySelector("#svgBlock"); // Select the SVG element
-	const rect = svg.querySelector("rect"); // Select the rectangle inside the SVG
-  
-	// Get the computed height of the aside element
-	const asideHeight = aside.offsetHeight;
-  
-	// If the aside has a height, update the SVG and rect
-	if (asideHeight > 0) {
-		// Set the height of the SVG
-		svg.setAttribute("height", asideHeight);
-
-		// Set the rectangle dimensions
-		rect.setAttribute("width", "100%");
-		rect.setAttribute("height", asideHeight);
-	} else {
-		console.warn("Aside height is 0. Make sure the aside element is properly styled.");
-	}
-  }
 
 
 function loadContent(id) {

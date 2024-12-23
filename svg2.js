@@ -1,10 +1,3 @@
-/*
-Variables should not be used outside of functions unless they are constants.
-A component is removed when the user clicks other button so variable values are lost.
-If you need to keep the variable values between buttons, you can save them in 
-the "component" object.
-*/
-
 function start(component, g) {
 
 	  function createTimeline() {
@@ -64,14 +57,38 @@ function start(component, g) {
 				const isExpanded = moreText.style("display") === "block";
 				moreText.style("display", isExpanded ? "none" : "block");
 				d3.select(this).text(isExpanded ? "Read More" : "Read Less");
+				// Recalculate height after expanding/collapsing text
+				adjustTimelineHeight();
 			  });
 		  });
+		   // Adjust height dynamically after rendering the timeline
+		   adjustTimelineHeight();
 		});
 	  }
 
 	    // Call the createTimeline function
- 		 createTimeline();
+		  function adjustTimelineHeight() {
+			const svg = document.querySelector("#svgBlock");
+			const rect = svg.querySelector("rect");
+			const timelineContainer = document.querySelector(".timeline-container");
+		  
+			if (timelineContainer) {
+			  const timelineHeight = timelineContainer.scrollHeight;
+		  
+			  // Set the height of the SVG and rectangle
+			  svg.setAttribute("height", timelineHeight);
+			  rect.setAttribute("height", timelineHeight);
+			  rect.setAttribute("width", "100%");
+		  
+			  console.log("Adjusted height:", timelineHeight); // Debugging log
+			} else {
+			  console.warn("Timeline container not found!");
+			}
+		  }
+		  createTimeline();
+
 }
+
 
 function end(component, g) {
 	console.log("end " + component.id + " enter");
