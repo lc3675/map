@@ -18,6 +18,8 @@ function start(component, g) {
 
 function end(component, g) {
 	console.log("end " + component.id + " enter");
+	// Clear the SVG content
+	 d3.select("#svgBlock").selectAll("*").remove();
 }
 
 export {start, end};

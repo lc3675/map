@@ -7,17 +7,19 @@ const holder={
 };
 
 async function start() {
-	holder.svg = d3.select("svg");
+	holder.svg = d3.select("#svgblock");
 	holder.data = await d3.json("data.json");
 	holder.data.selected["js"] = null;
 	addButtons(holder.data.components);
 	loadContent(holder.data.selected.id);
 
-   // Adjust the rectangle height after loading
+ 	  // Adjust the rectangle height after loading
  	  adjustRectHeight();
+ 	 // Add a resize event listener to ensure dynamic adjustments
+ 	 window.addEventListener("resize", adjustRectHeight);
 	 // Create the masonry layout
  	 createMasonryLayout();
-
+	createTimeline();
  return;
 }
 
@@ -42,51 +44,33 @@ function createButton(ele) {
   return b;
 }
 
+function adjustRectHeight() {
+	const aside = document.querySelector(".aside"); // Select the aside element
+	const svg = document.querySelector("#svgBlock"); // Select the SVG element
+	const rect = svg.querySelector("rect"); // Select the rectangle inside the SVG
+  
+	// Get the computed height of the aside element
+	const asideHeight = aside.offsetHeight;
+  
+	// If the aside has a height, update the SVG and rect
+	if (asideHeight > 0) {
+		// Set the height of the SVG
+		svg.setAttribute("height", asideHeight);
+
+		// Set the rectangle dimensions
+		rect.setAttribute("width", "100%");
+		rect.setAttribute("height", asideHeight);
+	} else {
+		console.warn("Aside height is 0. Make sure the aside element is properly styled.");
+	}
+  }
+
+
 function loadContent(id) {
 	loadHtmlContent(id);
 	loadJsContent(id);
 	return;
 }
-
-//Dynamic height adjustment for rectangle SVG//
-function adjustRectHeight() {
-	const aside = document.querySelector(".aside"); // Select the aside element
-	const rect = document.querySelector("svg rect"); // Select the rect element
-	
-	// Get the computed height of the aside element
-	const asideHeight = aside.offsetHeight;
-	
-	// Set the rect height to match the aside height
-	rect.setAttribute("height", asideHeight);
-  }
-  // Add event listeners to ensure it adjusts dynamically
-  window.addEventListener("resize", adjustRectHeight);
-
-
-// Creates a Masonry Layout with Text.//
-  function createMasonryLayout() {
-	const container = d3.select("#svgBlock") // Use svgBlock as the container
-	  .append("foreignObject") // Add foreignObject to embed HTML
-	  .attr("width", "100%")
-	  .attr("height", "100%")
-	  .append("xhtml:div") // Embed a div for masonry layout
-	  .attr("class", "masonry"); // Add masonry CSS class
-  
-	// Load data from CSV
-	d3.csv("data.csv").then(data => {
-	  // For each row in the CSV, create a box
-	  data.forEach(d => {
-		container.append("div")
-		  .attr("class", "masonry-box") // Apply masonry box style
-		  .text(d.text); // Populate with text content from CSV
-	  });
-	});
-  }
-  
-  // Call the function to create the masonry layout
-  createMasonryLayout();
-
-
 
 async function loadJsContent(id) {
 	const g = emptyG();

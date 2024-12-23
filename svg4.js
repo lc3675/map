@@ -68,6 +68,8 @@ function end(component, g) {
 	console.log("end " + component.id + " enter");
 	const timeoutID = component.data[KeyTimeoutID];
 	clearTimeout(timeoutID);
+	// Clear the SVG content
+	d3.select("#svgBlock").selectAll("*").remove();
 }
 
 export {start, end};
